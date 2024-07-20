@@ -1,0 +1,8 @@
+.li {
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px 4px gray;
+  padding: 20px;
+  text-align: center;
+  width: max-content;
+  margin-bottom: 24px;
+}
