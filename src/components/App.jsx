@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import ErrorMessage from "./ErrorMessage/ErrorMessage";
 import styles from "./App.module.css";
-import ModalComponent from "../Modal";
+import ImageModal from "./ImageModal/ImageModal";
 
 const App = () => {
   const [hits, setHits] = useState([]);
@@ -16,7 +16,19 @@ const App = () => {
   const [isError, setIsError] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+
+  function openModal(photo) {
+    setSelectedPhoto(photo);
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+    setSelectedPhoto(null);
+  }
+
   useEffect(() => {
     if (query) {
       const getData = async () => {
@@ -48,10 +60,15 @@ const App = () => {
     <div className={styles.container}>
       <Toaster />
       <SearchBar setQuery={handleSetQuery} />
-      <ImageGallery hits={hits} />
+      <ImageGallery hits={hits} openModal={openModal} />
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
       {page < totalPages && <LoadMoreBtn setPage={setPage} />}
+      <ImageModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        photo={selectedPhoto}
+      />
     </div>
   );
 };
