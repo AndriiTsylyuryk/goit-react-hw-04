@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-const ImageCard = ({url, alt}) => {
+const ImageCard = ({ url, alt,  }) => {
   return (
-    <div> <img src={url} alt={alt}/></div>
-  )
-}
+    <div >
+      {" "}
+      <img src={url} alt={alt} />
+    </div>
+  );
+};
 
-export default ImageCard
+export default ImageCard;

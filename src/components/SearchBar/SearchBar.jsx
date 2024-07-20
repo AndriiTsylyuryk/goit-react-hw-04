@@ -1,7 +1,7 @@
 import { Formik, Field, Form } from "formik";
 import React from "react";
 import toast from 'react-hot-toast';
-
+import s from './SearchBar.module.css'
 
 const SearchBar = ({ setQuery }) => {
   const handleSubmit = (values) => {
@@ -25,7 +25,7 @@ const SearchBar = ({ setQuery }) => {
             autoFocus
             placeholder="Search images and photos"
           />
-          <button type="submit">Search</button>
+          <button className={s.button} type="submit">Search</button>
         </Form>
       </Formik>
     </div>

@@ -6,6 +6,8 @@ import Loader from "./Loader/Loader";
 import { Toaster } from "react-hot-toast";
 import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
 import ErrorMessage from "./ErrorMessage/ErrorMessage";
+import styles from "./App.module.css";
+import ModalComponent from "../Modal";
 
 const App = () => {
   const [hits, setHits] = useState([]);
@@ -14,6 +16,7 @@ const App = () => {
   const [isError, setIsError] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  
   useEffect(() => {
     if (query) {
       const getData = async () => {
@@ -42,7 +45,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Toaster />
       <SearchBar setQuery={handleSetQuery} />
       <ImageGallery hits={hits} />
