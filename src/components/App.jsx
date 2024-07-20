@@ -13,15 +13,18 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   useEffect(() => {
     if (query) {
       const getData = async () => {
         try {
           setIsError(false);
           setIsLoading(true);
-          const response = await fetchPhotos(query, page);
-          setHits(prev=> [...prev, ...response.results]);
-          console.log(response);
+          const { data, headers } = await fetchPhotos(query, page);
+          setHits((prev) => [...prev, ...data]);
+          const totalItems = parseInt(headers["x-total"], 10);
+          const perPage = parseInt(headers["x-per-page"], 10);
+          setTotalPages(Math.ceil(totalItems / perPage));
         } catch (error) {
           setIsError(true);
         } finally {
@@ -32,11 +35,11 @@ const App = () => {
     }
   }, [query, page]);
 
-  const handleSetQuery = query => {
+  const handleSetQuery = (query) => {
     setQuery(query);
-    setHits([])
-    setPage(1)
-  }
+    setHits([]);
+    setPage(1);
+  };
 
   return (
     <div>
@@ -45,7 +48,7 @@ const App = () => {
       <ImageGallery hits={hits} />
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <LoadMoreBtn setPage={setPage} page={page} />
+      {page < totalPages && <LoadMoreBtn setPage={setPage} />}
     </div>
   );
 };
