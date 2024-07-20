@@ -1,10 +1,15 @@
 import { Formik, Field, Form } from "formik";
 import React from "react";
+import toast from 'react-hot-toast';
 
-const SearchBar = ({setQuery,}) => {
+
+const SearchBar = ({ setQuery }) => {
   const handleSubmit = (values) => {
-    console.log(values);
-    setQuery(values.query);
+    if (values.query) {
+      setQuery(values.query);
+    } else {
+      toast.error("This didn't work.")
+    }
   };
   const initialValues = {
     query: "",
@@ -15,7 +20,7 @@ const SearchBar = ({setQuery,}) => {
         <Form>
           <Field
             name="query"
-            type="text"
+            type="search"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"

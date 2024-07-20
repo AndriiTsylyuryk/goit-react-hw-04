@@ -1,12 +1,14 @@
 import axios from "axios"
 
-export const fetchPhotos = async (query) =>{
+export const fetchPhotos = async (query, page, perPage) =>{
     const response = await axios.get('https://api.unsplash.com/search/photos', {
         params: {
-            query
+            query,
+            page,
+            per_page: perPage
         },
         headers: {
-            Authorization: 'Client-ID _1lGAIPsgisF2RbcbqEmlfXQPecGaCH0SHkv5XVfpI0' // замініть '_1lGAIPsgisF2RbcbqEmlfXQPecGaCH0SHkv5XVfpI0' на ваш реальний ключ доступу
+            Authorization: 'Client-ID _1lGAIPsgisF2RbcbqEmlfXQPecGaCH0SHkv5XVfpI0'
         }
     });
     return response.data;
