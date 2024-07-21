@@ -1,10 +1,9 @@
-import React from 'react';
-
+import React from "react";
 
 const ImageCard = ({ url, alt, onClick }) => {
   return (
-    <div onClick={onClick}>
-      <img src={url} alt={alt}  />
+    <div>
+      <img src={url} alt={alt} onClick={onClick} />
     </div>
   );
 };
